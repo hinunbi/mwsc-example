@@ -1,7 +1,7 @@
 Apache Camel을 이용한 마이크로 웹 서비스 클라이언트
 =====================================
 
-프로젝트 컴파일
+마이크로 웹 서비스 클라이언트 컴파일
 
     mvn compile
 
@@ -14,7 +14,7 @@ Apache Camel을 이용한 마이크로 웹 서비스 서버
 [https://github.com/hinunbi/mwss-example](https://github.com/hinunbi/mwss-example)
 
 
-Apache Camel을 이용한 마이크로 웹 서비스 개발 블로그
+Apache Camel을 이용한 마이크로 웹 서비스 개발
 
 [http://barunmo.blogspot.kr/2014/11/apache-camel.html](http://barunmo.blogspot.kr/2014/11/apache-camel.html)
 
