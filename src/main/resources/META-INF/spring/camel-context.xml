@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+		http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+	<!-- 웹 서비스와 웹 URL 지정 -->
+	<cxf:cxfEndpoint id="PaymentServiceEndpoint"
+		serviceClass="com.brm.ws.payment.PaymentPortType"
+		address="http://localhost:9090/paymentService">
+	</cxf:cxfEndpoint>
+
+	<bean id="noErrorHandler" class="org.apache.camel.builder.NoErrorHandlerBuilder"/>
+
+	<!-- 카멜 라우팅 정의 -->
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+		<!-- 카멜 오루 처리 로직 무시 -->
+		<route errorHandlerRef="noErrorHandler">
+			<!-- 이체 웹 서비스 동기 호출 엔드포인트 -->
+			<from uri="direct:payment" />
+			<!-- 이체 웹 서비스 인터페이스 엔드포인트 -->
+			<to uri="cxf:bean:PaymentServiceEndpoint?defaultOperationName=transferFunds" />
+		</route>
+	</camelContext>
+
+</beans>
